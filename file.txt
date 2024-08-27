@@ -778,3 +778,54 @@ A: By providing custom error messages in the `messages.properties` file or using
 
 30. How can you test a Spring Boot application?
 A: By using `@SpringBootTest` for integration tests and `@MockBean` for mocking dependencies
+
+
+Latest:
+
+1. What is the principal advantage provided by AJAX?  
+A:   It allows web pages to be updated without the need for reloading, based on background asynchronous communication with the server.
+
+2. Which of the following Spring MVC handler methods is called when submitting a form that adds a new Product in the database and redirects the user to all the products if successfully added?  
+ A:  @RequestMapping(value = "/products/add", method = RequestMethod.POST)
+public String addProduct(@ModelAttribute("product") Product product) 
+{ 
+productService.addProduct(product);
+return "redirect:/shop/products";
+}
+
+3. You’re a Spring software developer working on a class containing REST style endpoints responsible for serving AJAX requests coming from JavaScript clients. You’ve just started out, and have an empty class. What is the first step you will take in annotating this class, in order to follow the easiest route offered by Spring to achieve this?  
+A: Annotate the class with @RestController.
+
+4. What HTTP verb is used only for retrieving data?  
+A: GET
+
+5. What does AJAX stand for?  
+A: Asynchronous JavaScript and XML
+
+6. What Spring annotation allows you to extract the parameters of an HTTP GET request?  
+A: @RequestParam
+
+7. What does MVC stand for?  
+A:  Model-view-controller
+
+8. What method is utilized to send new data to a server for a new entity?  
+A: POST
+
+9. Which class provides access to details about a file that has been uploaded from a form in a Spring MVC application?  
+A: MultipartFile
+
+10. You are building an application that has the typical layers in an MVC application. These include the controllers, service, data, and persistence layers. Throughout your application you have found that the developers on your team are inputting the dependencies through the constructors, causing major issues with code readability and testing. What can you do to enhance testability throughout your application?  
+A: Using the @Autowired annotation to take advantage of Spring's dependency injection.
+
+11. If you issue a GET request that is successfully serviced by a RESTful web service, what HTTP status code will be returned by the server together with the resource?  
+A: 200
+
+12. What is one benefit of adding a service layer to your application?  
+    It abstracts the business logic into another layer of the application that is not your controller, allowing the controller to only handle how the
+A: request is handled.
+
+13. You require modifying a singular resource that is part of a resource collection. What operation will address your need?  
+A: PUT
+
+14. What is the main Spring annotation used to map HTTP requests, including DELETE, to actual controller methods?  
+A: @RequestMapping
