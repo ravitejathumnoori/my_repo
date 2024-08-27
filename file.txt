@@ -1,4 +1,780 @@
-This is branch A's change
-This is branch A's change again
-This is branch B's change
+Need check
+1. Which annotation can be called to validate a variable that contains a value which is not null nor an empty string? 
+A: @NotEmpty
 
+Need check
+4. What is the purpose of a Model(s) in the MVC architecture? 
+A: To contain all of the data and logic in an application. 
+
+5. A Spring MVC application is supposed to update a user from a form but instead of updating it, inserts a new line in the database. While debugging you find the below handler method:
+@RequestMapping(value = "user/{user_id}/edit", method = RequestMethod.POST)
+public String updateUser(@Valid @ModelAttribute("user") User user, BindingResult result) {
+  if (result.hasErrors()) {
+    return "updateUserForm";
+  } else {
+    this.userRepository.save(user);
+    return "redirect:/users/{user_id}";
+  }
+}
+What is the issue?
+A: The user object should be fetched from the database based on the id of the user passed as parameter and then this.userRepository.save should be called on the updated user.
+
+Need to check
+6. What is an example of a benefit received from API documentation? 
+A: Easier maintenance 
+
+Need check
+7. You have written an API with Spring and have enabled Swagger to document the API. Now that you have Swagger, the Swagger UI is exposed to all of the internet, causing a potential security vulnerability. What can you do to mitigate this vulnerability?
+A: Use the spring-boot-starter-security dependency to implement authentication.
+
+Need check
+8. In Spring, what happens when you omit the @RestResource annotation on an associated resource property?
+A: Both the path and the name of the associated resource will have the value of the name of the actual property.
+
+Need check
+9. How can you avoid double submission of the same form in Spring MVC?
+A: By using the RedirectView to implement the Post-Redirect-Get (PRG) pattern
+
+10. Given the following beginning of a Spring entity:
+//valid declaration present before this point
+@Entity
+public class SportsCar {
+    private int hp;
+    //valid declaration continues after this point
+}
+
+Need check
+How will you annotate the field hp such that only values over 300 are valid, while also providing the helpful message below?
+
+Please provide a value that is larger than 300
+A: @Min(value = 300, message = "Please provide a value that is larger than 300")
+
+Need check
+11. What is the standard procedure by which you would vary the value of the database connection URL on a per-environment basis using functionality offered by Spring?
+A: Define a database connection URL per profile and activate the profile that is suitable for the environment you're running in.
+
+12. How would you write a single controller method that will display the string "Hello" and the word that represents the last route name in your url? e.g. http://localhost:8080/hello/pluralsight will display "Hello pluralsight"
+A: @Controller
+@RequestMapping("/hello")
+public class HelloController {
+  @RequestMapping(value = "/{word}", method = GET)
+  public @ResponseBody
+  String hello(@PathVariable String word) {
+    return "Hello " + word;
+  }
+} 
+
+13. You are creating Spring MVC controllers with @Controller and are mapping requests with annotations. What code snippet can you use to successfully implement a @PostMapping annotation for a customer endpoint? 
+A: @Controller
+public class CustomerController {
+     @PostMapping(path = "/customers", consumes = "application/json", produces = "application/json")
+     public void customers(@RequestBody Customer customer) {
+          // user code here
+     }
+}
+
+Need check
+14. Which HTML tag do we need to use in a form to enable the user to upload a file in a Spring MVC application?
+A: <input type="file" name="file" /> 
+
+Need check
+15. What is an example of a Swagger annotation that you can only apply at the level of your controller's methods in order to provide documentation about how the method services web requests via its attributes?
+A: @ApiOperation
+
+Need check
+16. What is the purpose of versioning APIs?
+A: It allows you to iterate faster when required changes are identified for multiple client integrations.
+
+17. You're running an ethical web crawler that is browsing the Internet to bring updates from your favorite websites. Your code is unit tested and has been running without error for a long time. When reviewing the results saved by the crawler, you notice that, for the same, single URI pointing to a REST resource, the crawler has successfully fetched two different results, at a distance of two weeks. The results have the same data structure, but the values are different. What is the most likely explanation for the situation?
+A: The REST service is implemented correctly and the set of entities which the resource maps to has simply changed over time.
+
+Need check
+18. What directive declares that your JSP page uses a set of custom tags related to your Spring MVC application?
+A: taglib
+
+Need check
+19. What class configures a request handler for serving static resources by forwarding the request to the Servlet container's "default" Servlet in a Spring MVC application?
+A: DefaultServletHandlerConfigurer
+
+Need check
+20. When serializing a form to a JSON in a Spring MVC application, you notice that the result is huge because the entire object graph was serialized. What might be the issue behind this behavior? 
+A: The form was represented by the Entity object that has relational annotations on the fields.
+
+21. Suppose that "customLib" JSP library contains a tag called "hello". How would you define this tag in the following view page of your Spring MVC application?  
+<html>
+ <body>
+  <mytag:hello/>
+ </body>
+</html>
+A: <%@ taglib uri = "http://www.example.com/customLib" prefix = "mytag" %>
+
+Need check
+22. What additional Maven dependency does FreeMarker template engine require to integrate with Spring MVC?
+A: spring-context-support
+
+Need check
+23. What is the name of the pattern that creates a new request and redirects the user to the request path when successfully submitting a form in Spring MVC?
+A: Redirect-after-post
+
+24. How would you write a method that creates a new empty Product domain object and attaches it to the model in Spring MVC?
+A: @RequestMapping(value = "/products/add", method = GET)
+public String addProduct(@ModelAttribute("newProduct") Product product) {
+ return "addProduct";
+}
+
+25. You implemented classes that provide the base implementation of the HandlerInterceptor interface.  The method definition for the preHandle method looks like this: boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) You have returned false in this method and nothing else is continuing to process. Why might this be happening? 
+A: Spring assumes that the request has been processed by the spring interceptor itself and no more processing is required.
+
+26. You are using Springfox to implement the Swagger standard for your Spring application. What should your config class look like to enable Swagger for your API? 
+A: @Configuration
+@EnableSwagger2
+public class SpringFoxConfig {                                        
+    @Bean
+    public Docket api() {
+        return new Docket(DocumentationType.SWAGGER_2)  
+          .select()                                  
+          .apis(RequestHandlerSelectors.any())              
+          .paths(PathSelectors.any())                          
+          .build();
+     }
+}
+
+Need check
+27. What do you need to use in Spring MVC for binding a list of objects to a JSP view?
+A: JSTL
+
+Need check
+28. What class can you use in Spring MVC to pass both the data and the name of the page that you want to access when clicking a link on a page?
+A: ModelAndView
+
+29. How would you implement the
+ @Override
+public void onStartup(ServletContext container) {}
+method from the WebApplicationInitializer so that all the requests starting with "/demo" are handled by the DispatcherServlet? 
+A: ServletRegistration.Dynamic registration = container.addServlet("d", new DispatcherServlet());  
+registration.setLoadOnStartup(1);  
+registration.addMapping("/demo/*");
+
+Need check
+30. What is the name of the Spring concept that allows you alter the Spring-provided default view of your model?
+A: Projection
+
+
+1. You're finished with a Spring-based RESTful web service and you're now configuring automated documentation generation from it using Springfox for Swagger 
+
+Need check
+2. You're using @ApiOperation to change the name that gets shown in the documentation for one of your controller methods. How should you perform this task?
+A: Set the name of the operation via the value attribute of @ApiOperation 
+
+2. The following code snippet is part of the definition of a Spring REST API endpoint:
+@RequestMapping(value = "/cities", method = RequestMethod.GET)
+public String getCities(//your answer goes here) {
+  //assume a valid method body exists here
+}
+The method returns a list of all cities close to an airport code. The HTTP GET request will provide the airport code value via the airportCode request parameter. How will you specify the extraction of this parameter?
+A: @RequestParam(value = "airportCode") String airportCode 
+
+Need check
+3. What is an example of a Swagger annotation that you can only apply at the level of your controller's methods in order to provide documentation about how the method services web requests via its attributes?
+A: @ApiOperation
+
+Need check
+4. What additional Maven dependency does FreeMarker template engine require to integrate with Spring MVC?
+A: spring-context-support
+
+Need check
+5. What is the standard procedure by which you would vary the value of the database connection URL on a per-environment basis using functionality offered by Spring?
+A: Define a database connection URL per profile and activate the profile that is suitable for the environment you're running in.
+
+Need check
+6. What is the name of the pattern that creates a new request and redirects the user to the request path when successfully submitting a form in Spring MVC?
+A: Redirect-after-post
+
+
+7. Which of the following is an example of a valid relationship between @SessionAttributes and @ModelAttribute?
+A: @SessionAttributes lists the names or the types of model attributes that should be stored in a session while @ModelAttribute is used to define and instantiate those attributes.
+
+Need check
+8. You have just made a major update to an API that requires a new version 2.0. This new version needs to exist separately from the 1.0 version using URI Versioning. Which versioning change will allow you to properly implement this new version through URI versioning? 
+A: https://www.exampleapi.com/api/v2/data
+
+9. You want to pass a collection of values to the new view when clicking a link on a page in your Spring MVC application. Which of the following implementations would be the most suitable for this situation?
+A: @GetMapping("/newPage")
+public String newPage(Model model) {
+  model.addAttribute("welcomeMessage", "Welcome"); 
+  model.addAttribute("message", "Hello!");
+  return "viewPage";
+} 
+
+Need check
+10. What Spring annotation will help you maintain state for user sessions?
+A: @SessionAttributes
+
+
+Need check
+11. Given the following beginning of a Spring entity:
+//valid declaration present before this point
+@Entity
+public class SportsCar {
+    private int hp;
+    //valid declaration continues after this point
+}
+
+
+How will you annotate the field hp such that only values over 300 are valid, while also providing the helpful message below?
+
+Please provide a value that is larger than 300
+A: @Min(value = 300, message = "Please provide a value that is larger than 300")
+
+
+12. Given the following two definitions of a Spring RESTful web service:
+@RequestMapping(value = "/airports", method = RequestMethod.GET)
+public String getAirports(@RequestParam String code) {
+	//assume valid method body here
+}
+
+@RequestMapping(value = "/airports", method = RequestMethod.GET)
+public String getAirportsCacheBacked(@RequestParam String code) {
+	//assume valid method body here
+}
+What is your analysis of the definitions of these two endpoints?
+A: The two mappings are duplicate, which will result in Spring throwing an Ambiguous mapping exception, preventing the application from starting.
+
+Need check
+13. What is the purpose of @PostMapping annotated methods within Spring MVC? 
+A: Handling HTTP POST requests that match a provided URL expression
+
+14. You designed an order system for a restaurant vendor. You have classes that hold the order, product, and food items, and have built services for the respective domains. You are now building the FoodController. To ensure that decoupling is adhered to, what should the initialization of your controller code look like?
+A: @RestController
+@RequestMapping("/food")
+public class FoodController {
+     
+     private FoodService foodService;
+
+     @AutoWired
+     public FoodController(FoodService foodService) {
+          this.foodService = foodService;
+     }
+}
+
+Need check
+15. You versioned your API with a through request parameters but this is causing you to maintain too many URLs. How can you refactor your versioning strategy to be more adaptable? 
+A: Use Content-Type and Accept headers to tell API clients what data your API accepts and returns. 
+
+16. Which annotation can be called to validate a variable that contains a value which is not null nor an empty string? 
+A: @NotEmpty
+
+Need check
+17. In Spring, what happens when you omit the @RestResource annotation on an associated resource property?
+A: Both the path and the name of the associated resource will have the value of the name of the actual property.
+
+18. Your Spring MVC application has the DispatcherServlet registered within the servlet context by extending the AbstractAnnotationConfigDispatcherServletInitializer but your configuration class for the IOC container called WebConfig is not recognized. What should you check first? 
+A: That the getServletConfigClasses() method returns a Class[] containing WebConfig.class
+
+Need check
+19. What is the name of the Spring concept that allows you alter the Spring-provided default view of your model?
+A: Projection
+
+20. How would you write a single controller method that will display the string "Hello" and the word that represents the last route name in your url? e.g. http://localhost:8080/hello/pluralsight will display "Hello pluralsight"
+A: @Controller
+@RequestMapping("/hello")
+public class HelloController {
+  @RequestMapping(value = "/{word}", method = GET)
+  public @ResponseBody
+  String hello(@PathVariable String word) {
+    return "Hello " + word;
+  }
+} 
+
+Need check
+1. You're finished with a Spring-based RESTful web service and you're now configuring automated documentation generation from it using Springfox for Swagger 2. You're using @ApiOperation to change the name that gets shown in the documentation for one of your controller methods. How should you perform this task?
+A: Set the name of the operation via the value attribute of @ApiOperation 
+
+2. The following code snippet is part of the definition of a Spring REST API endpoint:
+@RequestMapping(value = "/cities", method = RequestMethod.GET)
+public String getCities(//your answer goes here) {
+  //assume a valid method body exists here
+}
+The method returns a list of all cities close to an airport code. The HTTP GET request will provide the airport code value via the airportCode request parameter. How will you specify the extraction of this parameter?
+A: @RequestParam(value = "airportCode") String airportCode 
+
+
+Need check
+What is an example of a Swagger annotation that you can only apply at the level of your controller's methods in order to provide documentation about how the method services web requests via its attributes
+A: @ApiOperation
+
+Need check
+4. What additional Maven dependency does FreeMarker template engine require to integrate with Spring MVC?
+A: spring-context-support
+
+Need check
+5. What is the standard procedure by which you would vary the value of the database connection URL on a per-environment basis using functionality offered by Spring?
+A: Define a database connection URL per profile and activate the profile that is suitable for the environment you're running in.
+
+Need check
+6. What is the name of the pattern that creates a new request and redirects the user to the request path when successfully submitting a form in Spring MVC?
+A: Redirect-after-post
+
+Need check
+7. Which of the following is an example of a valid relationship between @SessionAttributes and @ModelAttribute?
+A: @SessionAttributes lists the names or the types of model attributes that should be stored in a session while @ModelAttribute is used to define and instantiate those attributes.
+
+Need check
+8. You have just made a major update to an API that requires a new version 2.0. This new version needs to exist separately from the 1.0 version using URI Versioning. Which versioning change will allow you to properly implement this new version through URI versioning? 
+A: https://www.exampleapi.com/api/v2/data
+
+9. You want to pass a collection of values to the new view when clicking a link on a page in your Spring MVC application. Which of the following implementations would be the most suitable for this situation?
+A: @GetMapping("/newPage")
+public String newPage(ModelMap map) {          
+  map.addAttribute("welcomeMessage", "Welcome");
+  map.addAttribute("message", "Hello!");
+  return "viewPage";
+} 
+
+Need check
+10. What Spring annotation will help you maintain state for user sessions?
+A: @SessionAttributes
+
+Need check
+11. Given the following beginning of a Spring entity:
+//valid declaration present before this point
+@Entity
+public class SportsCar {
+    private int hp;
+    //valid declaration continues after this point
+}
+How will you annotate the field hp such that only values over 300 are valid, while also providing the helpful message below?
+
+Please provide a value that is larger than 300
+A: @Min(value = 300, message = "Please provide a value that is larger than 300")
+
+12. Given the following two definitions of a Spring RESTful web service:
+@RequestMapping(value = "/airports", method = RequestMethod.GET)
+public String getAirports(@RequestParam String code) {
+	//assume valid method body here
+}
+
+@RequestMapping(value = "/airports", method = RequestMethod.GET)
+public String getAirportsCacheBacked(@RequestParam String code) {
+	//assume valid method body here
+}
+What is your analysis of the definitions of these two endpoints?
+A: The two mappings are duplicate, which will result in Spring throwing an Ambiguous mapping exception, preventing the application from starting.
+
+Need check
+13. What is the purpose of @PostMapping annotated methods within Spring MVC? 
+A: Handling HTTP POST requests that match a provided URL expression
+
+14. You designed an order system for a restaurant vendor. You have classes that hold the order, product, and food items, and have built services for the respective domains. You are now building the FoodController. To ensure that decoupling is adhered to, what should the initialization of your controller code look like?
+A: @RestController
+@RequestMapping("/food")
+public class FoodController {
+     
+     private FoodService foodService;
+
+     @AutoWired
+     public FoodController(FoodService foodService) {
+          this.foodService = foodService;
+     }
+}
+
+Need check
+15. You versioned your API with a through request parameters but this is causing you to maintain too many URLs. How can you refactor your versioning strategy to be more adaptable? 
+A: Use Content-Type and Accept headers to tell API clients what data your API accepts and returns. 
+
+Need check
+16. Which annotation can be called to validate a variable that contains a value which is not null nor an empty string? 
+A: @NotEmpty
+
+Need check
+17. In Spring, what happens when you omit the @RestResource annotation on an associated resource property?
+A: Both the path and the name of the associated resource will have the value of the name of the actual property.
+
+18. Your Spring MVC application has the DispatcherServlet registered within the servlet context by extending the AbstractAnnotationConfigDispatcherServletInitializer but your configuration class for the IOC container called WebConfig is not recognized. What should you check first? 
+A: That the getServletConfigClasses() method returns a Class[] containing WebConfig.class
+
+Need check
+19. What is the name of the Spring concept that allows you alter the Spring-provided default view of your model?
+A: Projection
+
+20. How would you write a single controller method that will display the string "Hello" and the word that represents the last route name in your url? e.g. http://localhost:8080/hello/pluralsight will display "Hello pluralsight"
+A: @Controller
+@RequestMapping("/hello")
+public class HelloController {
+  @RequestMapping(value = "/{word}", method = GET)
+  public @ResponseBody
+  String hello(@PathVariable String word) {
+    return "Hello " + word;
+  }
+} 
+
+
+Need check
+1. Given the following beginning of a Spring entity:
+//valid declaration present before this point
+@Entity
+public class SportsCar {
+    private int hp;
+    //valid declaration continues after this point
+}
+How will you annotate the field hp such that only values strictly over 300 are valid, while also providing the helpful message below?
+Please provide a value that is larger than 300
+A: @Min(value = 301, message = "Please provide a value that is larger than 300")
+
+Need check
+2. You're working on implementing a Spring based HR system. You've defined all classes and their association relationships correctly, and you're now attempting to write automated integration tests for the associated resources. One of your tests is issuing a HEAD HTTP request directly to the URL of one of the associated resources but fails. What likely the cause for this, without inspecting the test logs?
+A: An associated resource only supports GET, PUT, POST, and DELETE requests.
+
+Need check
+3. You are building an API for a restaurant company. There is a possibility for a lot of different type of exceptions to be thrown which you do not have specific exception handlers for. What can you do to handle all the exceptions thrown by application?
+A: Use the @ControllerAdvice annotation on a class to define your global exception handler.
+
+4. You want to directly and efficiently pass a collection of values to the new view when clicking a link on a page in your Spring MVC application. Which implementation would be the most suitable for this situation?
+A: @GetMapping("/newPage")
+public String newPage(ModelMap map) {          
+  map.addAttribute("welcomeMessage", "Welcome");
+  map.addAttribute("message", "Hello!");
+  return "viewPage";
+}
+
+Need check
+5. What is the name of the pattern that creates a new request and redirects the user to the request path when successfully submitting a form in Spring MVC?
+A: Post/Redirect/Get (PRG)
+
+Need check
+6. What is the purpose of a Model(s) in the MVC architecture? 
+A: To contain all of the data and logic in an application. 
+
+Need check
+7. What additional Maven dependency does FreeMarker template engine require to integrate with Spring MVC?
+A: spring-context-support
+
+Need check
+8. What class can you use in Spring MVC to pass both the data and the name of the page that you want to access when clicking a link on a page?
+A: ModelAndView
+
+Need check
+10. How do you supply the version of your API to the Swagger 2 ApiInfo class?
+A: As a String type via the constructor
+
+Need check
+11. Where is the "dog.jpg" image located in your Spring MVC application if your web.xml contains the following configuration: <mvc:default-servlet-handler /> <mvc:resources mapping="/resource/" location="/resources/images/">   and the    <img src="resource/dog.jpg" />   is displayed correctly?
+A:  /src/main/webapp/resources/images 
+
+You're working on building a Spring REST API endpoint, responsible for returning a list of GPS data points. The exact type of this is GPSDataPoint. How will you define the return type of this endpoint in the shortest, valid way? Assume that it is placed in a @RestController-annotated class and that the GPSDataPoint exists and is implemented correctly
+A: List<GPSDataPoint>
+
+Need check
+13. What is an example of a Swagger annotation that you can only apply at the level of your controller's methods in order to provide documentation about how the method services web requests via its attributes?
+A: @ApiOperation
+
+Need check
+14. Which annotation will allow your DispatcherServlet to identify your class as eligible for receiving requests?
+A: @Controller
+
+Need check
+15. What is a disadvantage of having model classes that are also entity classes in a Spring MVC application?
+A: The MVC layer of the application has to deal with transactions.
+
+16. In Spring, what happens when you omit the @RestResource annotation on an associated resource property?
+A: Both the path and the name of the associated resource will have the value of the name of the actual property.
+
+17. Given the following definition of a @ModelAttribute:
+@ModelAttribute("recipe") 
+public CookingRecipe recipe() { return new CookingRecipe(); }
+How will you instruct Spring to store this attribute in the session?
+A: @SessionAttributes("recipe")
+
+18. In your Spring MVC application there is a form with reusable tags. The Standard Tag library in JSTL is referenced and the model class looks like below, however the data binding is not working. What is the cause?  
+public class User {
+ private String name;
+ private Integer id;
+} 
+A: The User class doesn’t define getters and setters for the fields.
+
+19. You're a software developer making use of a RESTful web service. You have a list of requests you want to send to an endpoint of this service by issuing HTTP requests from the command line of a terminal. Unfortunately, you issue the following the same request twice in a row by accident: PUT http://localhost:8888/api/v1/object/33 Assume that the RESTful web service is up at the specified location, that the body of the PUT request is valid, and that no resource representation exists at that URL at the time of running these requests. What do you expect to happen on the server? 
+A: The first request returns an HTTP code 201 and succeeds in creating the representation for the resource.
+
+The second request returns an HTTP code of either 200 or 204 and succeeds in updating the representation for the resource to an identical representation.
+
+Need check
+20. What path should you choose for storing the JSP view files in your Spring MVC application?
+A: src/main/webapp/WEB-INF/jsp/
+
+Need check
+21. Which of the following is an example of a valid relationship between @SessionAttributes and @ModelAttribute?
+A: @SessionAttributes lists the names or the types of model attributes that should be stored in a session while @ModelAttribute is used to define and instantiate those attributes.
+
+22. The following code snippet is part of the definition of a Spring REST API endpoint:
+@RequestMapping(value = "/airports", method = RequestMethod.GET)
+public String getAirports(@RequestParam String code) {
+	//assume valid method body here
+}
+Assume that this is the only existing endpoint. When executed, the following HTTP GET request encounters an exception. GET /airports?postCode=0123
+
+Why? Assume that the address part of the request is valid, even though it's not shown.
+A: The name of the post code parameter in the request is postCode but the server requires the presence of a parameter named code.
+
+Need check
+23. What can you use from Thymeleaf to create a common layout that can be reused in your Spring MVC application?
+A: Fragments
+
+1. What is the main bean that you must configure when setting up Springfox for Swagger 2?
+A: Docket
+
+2. What is the purpose of a Model(s) in the MVC architecture? 
+A: To contain all of the data and logic in an application. 
+
+3. Given the code snippet below, found in a class annotated with @RestController:
+@RequestMapping(value = "/cities", method = RequestMethod.GET)
+public List<ValidCity> getAllCitiesInCounty(
+  @RequestParam(value = "county") String county
+) {
+  //assume valid method body goes here
+}
+Assume that the ValidCity type exists and was defined correctly and that a valid method body exists and is also defined correctly. What is your analysis of this endpoint with regards to its ability to return the java.util.List type when responding to a request that accepts any MIME type with JSON content?
+A: Everything will work fine as it is because Spring will handle the serialization of the java.util.List to JSON.
+
+4. What is the delegate implementation of the ThemeSource that loads properties file from the root of the classpath in Spring MVC?
+A: org.springframework.ui.context.support.ResourceBundleThemeSource
+
+5. What is an example of a Swagger annotation that you can only apply at the level of your controller's methods in order to provide documentation about how the method services web requests via its attributes?
+A: @ApiOperation
+
+6. You're working on implementing a Spring REST API endpoint responsible for handling HTTP DELETE requests. Relative to the base URL of the controller, the endpoint only adds the id path variable of the resource to the actual URL. No actual request parameters are used. How will you annotate the appropriate controller method?
+A: @DeleteMapping("/{id}")
+
+7. You want to directly and efficiently pass a collection of values to the new view when clicking a link on a page in your Spring MVC application. Which implementation would be the most suitable for this situation?
+A: @GetMapping("/newPage")
+public String newPage(ModelMap map) {          
+  map.addAttribute("welcomeMessage", "Welcome");
+  map.addAttribute("message", "Hello!");
+  return "viewPage";
+} 
+
+8. Which annotation can be used to validate a variable that contains a value which is not null nor an empty string, and the variable may or may not be of type String?
+A: @NotEmpty
+
+9. What additional Maven dependency does FreeMarker template engine require to integrate with Spring MVC?
+A: spring-context-support
+
+10. What Spring annotation will help you maintain state for user sessions?
+A: @SessionAttributes
+
+11. Given the following beginning of a Spring entity:
+//valid declaration present before this point
+@Entity
+public class SportsCar {
+    private int hp;
+    //valid declaration continues after this point
+}
+How will you annotate the field hp such that only values strictly over 300 are valid, while also providing the helpful message below?
+Please provide a value that is larger than 300
+A: @Min(value = 301, message = "Please provide a value that is larger than 300")
+
+12. What Spring annotation maps AJAX calls made by clients to server-side methods?
+A: @RequestMapping
+
+13. What template engine would you use in your Spring MVC application to allow the design team to open and view the HTML pages without needing a development server?
+A: Thymeleaf
+
+14. What class can you use in Spring MVC to pass both the data and the name of the page that you want to access when clicking a link on a page?
+A: ModelAndView
+
+15. What path should you choose for storing the JSP view files in your Spring MVC application?
+A: src/main/webapp/WEB-INF/jsp/
+
+16. What is a disadvantage of having model classes that are also entity classes in a Spring MVC application?
+A: The MVC layer of the application has to deal with transactions.
+
+17. A Spring MVC application has combined 3 view resolvers together. You notice that when a view name is returned, the strategy that is used to resolve the view is not the correct one. What do you need to check in the configuration?
+A: The priority is declared through order property.
+
+18. What procedure is followed when you version your API through a custom HTTP header? 
+A: A new header is defined that has the version number in the request. 
+
+19. You implemented classes that provide the base implementation of the HandlerInterceptor interface.  The method definition for the preHandle method looks like this: boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) You have returned false in this method and nothing else is continuing to process. Why might this be happening? 
+A: Spring assumes that the request has been processed by the spring interceptor itself and no more processing is required.
+
+20. The following code snippet is part of the definition of a Spring REST API endpoint:
+@RequestMapping(value = "/airports", method = RequestMethod.GET)
+public String getAirports(@RequestParam String code) {
+	//assume valid method body here
+}
+Assume that this is the only existing endpoint. When executed, the following HTTP GET request encounters an exception. GET /airports?postCode=0123
+
+Why? Assume that the address part of the request is valid, even though it's not shown.
+A: The name of the post code parameter in the request is postCode but the server requires the presence of a parameter named code.
+
+21. Which annotation provides information to the Dispatcher Servlet about how to route the request to a controller method?
+A: @RequestMapping
+
+22. What is a benefit of versioning resources rather an API URLs?
+A: It allows you to keep the same URL while providing enhanced functionality for resources that need to be updated.
+
+23. In Spring, what happens when you omit the @RestResource annotation on an associated resource property?
+A: Both the path and the name of the associated resource will have the value of the name of the actual property.
+
+24. You are working on a large Spring project that has been live for more than 10 years, and the process is tedious. After some time you notice that the presentation and the domain layers are very tightly coupled and any change you make in the domain requires you to also change the controllers. How can you start refactoring this application in order to decouple the above layers?
+A: Use Data Transfer Objects (DTO) in the service layer of the application. 
+
+25. You are creating Spring MVC controllers with @Controller and are mapping requests with annotations. What code snippet can you use to successfully implement a @PostMapping annotation for a customer endpoint? 
+A: @Controller
+public class CustomerController {
+     @PostMapping(path = "/customers", consumes = "application/json", produces = "application/json")
+     public void customers(@RequestBody Customer customer) {
+          // user code here
+     }
+}
+
+26. You are a software developer attempting to consume a RESTful web service. When attempting to GET a resource, the server returns a 410 HTTP status code. Thinking just about the status code, what does this mean?
+A: The server says that the resource has been permanently removed.
+
+27. When sending a request to http://localhost:8080/test/demo the response is 404 Not Found. What is the mistake in the below controller?
+@Controller
+@RequestMapping("/")
+public class DemoController {
+  @RequestMapping("/demo")
+  @ResponseBody
+  public String message(Model model) {
+    return "Hello World!";
+  } 
+}
+A: The @RequestMapping annotation on the class should be @RequestMapping("/test") .
+
+28. Given the following Spring code snippet:
+@Controller
+public class RecipeController {
+  @RequestMapping(
+     value = "/api/quantities", 
+     method = RequestMethod.GET,
+     params = {"recipe"}
+  )
+  public String getQuantities(
+     @RequestParam(value = "recipe") String recipe
+  ) {
+  
+    //assume valid method code is here
+  
+  }
+}
+
+When you try to correctly access it from a browser, the request fails and a 404 HTTP status code is returned. How would you fix it by only changing the method?
+A: Add @ResponseBody before the return type of the method.
+
+29. What Spring annotation allows you to customize the name of an associated entity?
+A: @RestResource
+
+30. What pattern does the DispatcherServlet from Spring MVC framework implement?
+Front Controller Pattern
+
+Here are the last 30 questions converted to text format, along with their answers:
+
+
+
+1. What template engine would be the easiest to integrate in your Spring MVC application with Spring Boot?
+
+A: Thymeleaf
+
+2. Assume the existence of an `Airplane` class that is correctly defined and which in the correct state for allowing projections to be created on it. It has a `String` field called `identifier` and another `String` field called `parentCompany`. You want to define a Projection that only includes the `parentCompany`. The projection must be called `briefAirplane`. How can you do this?
+
+Answer: 
+```java
+@Projection(name = "briefAirplane", types = { Airplane.class })
+public interface BriefAirplane {
+    String getParentCompany();
+}
+```
+3. The following configuration files are present in the code repository of a Spring application:
+   1. `application.properties`
+   2. `application-dev.properties`
+   3. `application-prod.properties`
+
+   You're starting the application with an active `dev` profile. Which of the configuration file(s) above will be loaded by Spring?
+A: 1 and 2
+
+4. Why is it important to check for a valid input when managing requests?
+A: It prevents unexpected exceptions that may be thrown by your application.
+
+5. When using Spring, what can be used to handle cross-cutting concerns in your application?
+A: The handler interceptor
+
+6. You're working on a Spring-enabled marketplace for buying and selling cars. You've defined a projection called `lightCar`, in an interface called `ProjectionCar`, on a type class `Car`. You're now manually checking your local environment to see how the car is being displayed through the new projection using the URL below. You can access the URL, but the old representation of the car is being displayed, meaning the projection doesn't seem to be applied. Why?
+   `http://localhost:8080/rest/car/1`
+A: The URL is incorrect; the correct one is `http://localhost:8080/rest/car/1?projection=lightCar`
+
+7. Your company has had a set of different APIs that consumers use. Due to market demands you have frequently been making updates and have had to continuously update the URL (example below).
+   `https://www.myAPI.com/api/v1/orders/1234`
+
+   Currently, anyone who knows the ID of the order can use this API call with HTTP GET. What security vulnerability are you potentially exposing with this approach?
+A: Insecure direct object reference (IDOR)
+
+8. What can you use in Spring to make sure only a specific type of request is allowed?
+A: Request mapping with specific HTTP methods
+
+9. Which annotation would you use to define a Spring controller?
+A: `@Controller`
+
+10. What feature of Spring Boot helps you automatically configure your application based on the dependencies in your project?
+A: Auto-configuration
+
+11. What is the purpose of the `@Service` annotation in Spring?
+A: To indicate that a class is a service component and should be managed by the Spring container
+
+12. In Spring, how can you define a custom exception handler for a specific type of exception?
+A: By using the `@ControllerAdvice` annotation along with `@ExceptionHandler`
+
+13. How can you define a method in a Spring service to be called after the service is initialized?
+A: `@PostConstruct`
+
+14. What does the `@Autowired` annotation do in Spring?
+A: It allows Spring to automatically inject the dependent beans into a class
+
+15. How can you configure multiple data sources in a Spring Boot application?
+A: By defining multiple `DataSource` beans and specifying their configuration in the `application.properties` file
+
+16. What is the use of the `@Entity` annotation in Spring Data JPA?
+A: It marks a class as a JPA entity that maps to a database table
+
+17. How can you secure a Spring Boot application using Spring Security?
+A: By configuring Spring Security and defining security policies in a configuration class
+
+18. What annotation is used to create a Spring Boot application?
+A: `@SpringBootApplication`
+
+19. How can you enable Spring Boot's actuator endpoints?
+A: By adding the `spring-boot-starter-actuator` dependency and configuring the endpoints in `application.properties`
+
+20. What is the role of `application.properties` in a Spring Boot application?
+A: To define application-specific properties and configuration settings
+
+21. How can you set up a custom validation constraint in Spring Boot?
+A: By creating a custom annotation and implementing the `ConstraintValidator` interface
+
+22. How do you define a RESTful API endpoint in Spring Boot?
+A: By using the `@RestController` annotation and mapping methods with `@RequestMapping` or `@GetMapping`, `@PostMapping`, etc.
+
+23. What is the purpose of the `@Value` annotation in Spring?
+A: To inject values into fields from configuration properties
+
+24. How can you configure logging levels in a Spring Boot application?
+A: By setting logging levels in the `application.properties` or `application.yml` file
+
+25. What does the `@RequestMapping` annotation do in Spring?
+A: It maps HTTP requests to handler methods in controllers
+
+26. How can you handle exceptions globally in a Spring Boot application?
+A: By using `@ControllerAdvice` and `@ExceptionHandler` to define global exception handling
+
+27. What annotation would you use to specify that a method should be executed asynchronously in Spring?
+A: `@Async`
+
+28. How can you manage transaction boundaries in Spring?
+A: By using `@Transactional` to define transaction management at the method or class level
+
+29. How can you customize error messages in a Spring Boot application?
+A: By providing custom error messages in the `messages.properties` file or using a `@ControllerAdvice` class
+
+
+30. How can you test a Spring Boot application?
+A: By using `@SpringBootTest` for integration tests and `@MockBean` for mocking dependencies
